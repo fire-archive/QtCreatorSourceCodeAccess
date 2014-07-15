@@ -26,7 +26,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 bool FXCodeSourceCodeAccessor::CanAccessSourceCode() const
 {
-  return true;
+  return FPaths::FileExists(TEXT("/usr/bin/clang"));
 }
 
 FName FXCodeSourceCodeAccessor::GetFName() const
