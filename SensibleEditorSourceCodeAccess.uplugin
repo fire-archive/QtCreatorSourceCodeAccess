@@ -4,7 +4,7 @@
 	"Version" : 1,
 	"VersionName" : "1.0",
 	"CreatedBy" : "K. Ernest 'iFire' Lee",
-	"CreatedByURL" : "",
+	"CreatedByURL" : "https://github.com/fire/SensibleEditorSourceCodeAccess.git",
 	"EngineVersion" : "4.3.0",
 	"Description" : "Allows access to source code with Sensible Editor.",
 	"Category" : "Developer.Source Code Access",
@@ -15,6 +15,8 @@
 		{
 			"Name" : "SensibleEditorSourceCodeAccess",
 			"Type" : "Developer",
+			"WhitelistPlatforms" : [ "Linux" ],
+			"LoadingPhase" : "PreDefault"
 		}
 	]
 }
