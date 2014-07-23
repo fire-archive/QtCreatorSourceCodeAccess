@@ -1,19 +1,19 @@
 {
 	"FileVersion" : 3,
-	"FriendlyName" : "Sensible Editor Source Code Access",
+	"FriendlyName" : "Qt Creator Source Code Access",
 	"Version" : 1,
 	"VersionName" : "1.0",
 	"CreatedBy" : "K. Ernest 'iFire' Lee",
-	"CreatedByURL" : "https://github.com/fire/SensibleEditorSourceCodeAccess.git",
+	"CreatedByURL" : "https://github.com/fire/QtCreatorSourceCodeAccess.git",
 	"EngineVersion" : "4.3.0",
-	"Description" : "Allows access to source code with Sensible Editor.",
+	"Description" : "Allows access to source code with Qt Creator.",
 	"Category" : "Developer.Source Code Access",
 	"EnabledByDefault" : true,
 	
 	"Modules" :
 	[
 		{
-			"Name" : "SensibleEditorSourceCodeAccess",
+			"Name" : "QtCreatorSourceCodeAccess",
 			"Type" : "Developer",
 			"WhitelistPlatforms" : [ "Linux" ],
 			"LoadingPhase" : "PreDefault"

@@ -21,7 +21,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 #pragma once
 
-#include "SensibleEditorSourceCodeAccessor.h"
+#include "QtCreatorSourceCodeAccessor.h"
 
 class FXCodeSourceCodeAccessModule : public IModuleInterface
 {
@@ -31,5 +31,5 @@ public:
 	virtual void ShutdownModule() override;
 
 private:
-	FXCodeSourceCodeAccessor SensibleEditorSourceCodeAccessor;
+	FXCodeSourceCodeAccessor QtCreatorSourceCodeAccessor;
 };

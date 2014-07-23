@@ -19,20 +19,20 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
-#include "SensibleEditorSourceCodeAccessPrivatePCH.h"
+#include "QtCreatorSourceCodeAccessPrivatePCH.h"
 #include "Runtime/Core/Public/Features/IModularFeatures.h"
-#include "SensibleEditorSourceCodeAccessModule.h"
+#include "QtCreatorSourceCodeAccessModule.h"
 
-IMPLEMENT_MODULE( FXCodeSourceCodeAccessModule, SensibleEditorSourceCodeAccess );
+IMPLEMENT_MODULE( FXCodeSourceCodeAccessModule, QtCreatorSourceCodeAccess );
 
 void FXCodeSourceCodeAccessModule::StartupModule()
 {
 	// Bind our source control provider to the editor
-	IModularFeatures::Get().RegisterModularFeature(TEXT("SourceCodeAccessor"), &SensibleEditorSourceCodeAccessor );
+	IModularFeatures::Get().RegisterModularFeature(TEXT("SourceCodeAccessor"), &QtCreatorSourceCodeAccessor );
 }
 
 void FXCodeSourceCodeAccessModule::ShutdownModule()
 {
 	// unbind provider from editor
-	IModularFeatures::Get().UnregisterModularFeature(TEXT("SourceCodeAccessor"), &SensibleEditorSourceCodeAccessor);
+	IModularFeatures::Get().UnregisterModularFeature(TEXT("SourceCodeAccessor"), &QtCreatorSourceCodeAccessor);
 }

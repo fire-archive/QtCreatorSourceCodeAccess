@@ -19,10 +19,10 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
-#include "SensibleEditorSourceCodeAccessPrivatePCH.h"
-#include "SensibleEditorSourceCodeAccessor.h"
+#include "QtCreatorSourceCodeAccessPrivatePCH.h"
+#include "QtCreatorSourceCodeAccessor.h"
 
-#define LOCTEXT_NAMESPACE "SensibleEditorSourceCodeAccessor"
+#define LOCTEXT_NAMESPACE "QtCreatorSourceCodeAccessor"
 
 bool FXCodeSourceCodeAccessor::CanAccessSourceCode() const
 {
@@ -31,17 +31,17 @@ bool FXCodeSourceCodeAccessor::CanAccessSourceCode() const
 
 FName FXCodeSourceCodeAccessor::GetFName() const
 {
-  return FName("SensibleEditorSourceCodeAccessor");
+  return FName("QtCreatorSourceCodeAccessor");
 }
 
 FText FXCodeSourceCodeAccessor::GetNameText() const 
 {
-  return LOCTEXT("SensibleEditorDisplayName", "Sensible Editor");
+  return LOCTEXT("QtCreatorDisplayName", "Qt Creator");
 }
 
 FText FXCodeSourceCodeAccessor::GetDescriptionText() const
 {
-  return LOCTEXT("SensibleEditorDisplayDesc", "Open source code files with Sensible Editor");
+  return LOCTEXT("QtCreatorDisplayDesc", "Open source code files with Qt Creator");
 }
 
 bool FXCodeSourceCodeAccessor::OpenSolution()
@@ -49,16 +49,18 @@ bool FXCodeSourceCodeAccessor::OpenSolution()
   const FString FullPath = IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead( *FModuleManager::Get().GetSolutionFilepath() );
   if ( FPaths::FileExists( FullPath ) )
   {
-    FString Editor = FString(TEXT("/usr/bin/sensible-editor"));
+    FString Editor = FString(TEXT("/usr/bin/qtcreator"));
+    FString Args = FString(TEXT("-client "));
+    Args.Append(FullPath);
     if(FLinuxPlatformProcess::CreateProc(*Editor,
-                                            *FullPath,
-                                            true,
-                                            true,
-                                            false,
-                                            nullptr,
-                                            0,
-                                            nullptr,
-                                           nullptr).IsValid())
+                                         *Args,
+                                         true,
+                                         true,
+                                         false,
+                                         nullptr,
+                                         0,
+                                         nullptr,
+                                         nullptr).IsValid())
       return true;
   }
   return false;
@@ -66,38 +68,38 @@ bool FXCodeSourceCodeAccessor::OpenSolution()
 
 bool FXCodeSourceCodeAccessor::OpenFileAtLine(const FString& FullPath, int32 LineNumber, int32 ColumnNumber)
 {
-  bool ExecutionSucceeded = false;
-  if(ExecutionSucceeded == false)
-  {   
-    FString Editor = FString(TEXT("/usr/bin/sensible-editor"));
-    if(!(FLinuxPlatformProcess::CreateProc(*Editor,
-                                             *FullPath,
-                                             true,
-                                             true,
-                                             false,
-                                             nullptr,
-                                             0,
-                                             nullptr,
-                                             nullptr).IsValid()))
-      return false;
-  }
-  return true;
+    FString Editor = FString(TEXT("/usr/bin/qtcreator"));
+    FString Args = FString(TEXT("-client "));                                                           
+    Args.Append(FullPath).Append(TEXT(":")).Append(FString::FromInt(LineNumber));
+    if (FLinuxPlatformProcess::CreateProc(*Editor,
+                                          *Args,
+                                          true,
+                                          true,
+                                          false,
+                                          nullptr,
+                                          0,
+                                          nullptr,
+                                          nullptr).IsValid())
+      return true;
+  return false;
 }
 
 bool FXCodeSourceCodeAccessor::OpenSourceFiles(const TArray<FString>& AbsoluteSourcePaths) 
 {
   for ( const FString& SourcePath : AbsoluteSourcePaths ) 
   {
-    FString Editor = FString(TEXT("/usr/bin/sensible-editor"));
+    FString Editor = FString(TEXT("/usr/bin/qtcreator"));
+    FString Args = FString(TEXT("-client "));
+    Args.Append(SourcePath);
     if(!(FLinuxPlatformProcess::CreateProc(*Editor,
-                                             *SourcePath,
-                                             true,
-                                             true,
-                                             false,
-                                             nullptr,
-                                             0,
-                                             nullptr,
-                                             nullptr).IsValid())) 
+                                           *Args,
+                                           true,
+                                           true,
+                                           false,
+                                           nullptr,
+                                           0,
+                                           nullptr,
+                                           nullptr).IsValid())) 
         return false;
   }  
   return true;

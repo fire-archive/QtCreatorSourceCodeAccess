@@ -21,9 +21,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 namespace UnrealBuildTool.Rules
 {
-	public class SensibleEditorSourceCodeAccess : ModuleRules
+	public class QtCreatorSourceCodeAccess : ModuleRules
 	{
-                 public SensibleEditorSourceCodeAccess(TargetInfo Target)
+                 public QtCreatorSourceCodeAccess(TargetInfo Target)
 		 {
 		 	PrivateDependencyModuleNames.AddRange(
                                 new string[]
