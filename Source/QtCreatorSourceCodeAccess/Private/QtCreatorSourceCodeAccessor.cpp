@@ -1,4 +1,4 @@
- /* Copyright (c) 2014 K. Ernest 'iFire' Lee
+/* Copyright (c) 2014 K. Ernest 'iFire' Lee
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -21,6 +21,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 #include "QtCreatorSourceCodeAccessPrivatePCH.h"
 #include "QtCreatorSourceCodeAccessor.h"
+#include "DesktopPlatformModule.h"
 
 #define LOCTEXT_NAMESPACE "QtCreatorSourceCodeAccessor"
 
@@ -46,22 +47,25 @@ FText FXCodeSourceCodeAccessor::GetDescriptionText() const
 
 bool FXCodeSourceCodeAccessor::OpenSolution()
 {
-  const FString FullPath = IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead( *FModuleManager::Get().GetSolutionFilepath() );
-  if ( FPaths::FileExists( FullPath ) )
-  {
-    FString Editor = FString(TEXT("/usr/bin/qtcreator"));
-    FString Args = FString(TEXT("-client "));
-    Args.Append(FullPath);
-    if(FLinuxPlatformProcess::CreateProc(*Editor,
-                                         *Args,
-                                         true,
-                                         true,
-                                         false,
-                                         nullptr,
-                                         0,
-                                         nullptr,
-                                         nullptr).IsValid())
-      return true;
+  //const FString FullPath = IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead( *FModuleManager::Get().GetSolutionFilepath() );
+  FString FullPath;
+  if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)){
+    if ( FPaths::FileExists( FullPath ) )
+    {
+      FString Editor = FString(TEXT("/usr/bin/qtcreator"));
+      FString Args = FString(TEXT("-client "));
+      Args.Append(FullPath);
+      if(FLinuxPlatformProcess::CreateProc(*Editor,
+                                           *Args,
+                                           true,
+                                           true,
+                                           false,
+                                           nullptr,
+                                           0,
+                                           nullptr,
+                                           nullptr).IsValid())
+        return true;
+    }
   }
   return false;
 }

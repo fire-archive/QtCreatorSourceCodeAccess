@@ -29,6 +29,7 @@ namespace UnrealBuildTool.Rules
                                 new string[]
 				{
 					"Core",
+					"DesktopPlatform",
 					"SourceCodeAccess"
 				}
 			);
