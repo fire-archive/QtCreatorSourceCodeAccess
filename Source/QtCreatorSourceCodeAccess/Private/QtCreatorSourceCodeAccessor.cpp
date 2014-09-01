@@ -47,7 +47,6 @@ FText FXCodeSourceCodeAccessor::GetDescriptionText() const
 
 bool FXCodeSourceCodeAccessor::OpenSolution()
 {
-  //const FString FullPath = IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead( *FModuleManager::Get().GetSolutionFilepath() );
   FString FullPath;
   if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)){
     if ( FPaths::FileExists( FullPath ) )
