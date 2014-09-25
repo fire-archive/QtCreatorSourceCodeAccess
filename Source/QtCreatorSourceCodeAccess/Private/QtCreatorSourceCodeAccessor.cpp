@@ -19,33 +19,36 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
+
+// Add a class to handle the Solution file locally
+// instead of relying on FDesktopPlatformModule.
+
 #include "QtCreatorSourceCodeAccessPrivatePCH.h"
 #include "QtCreatorSourceCodeAccessor.h"
 #include "DesktopPlatformModule.h"
 
 #define LOCTEXT_NAMESPACE "QtCreatorSourceCodeAccessor"
-
-bool FXCodeSourceCodeAccessor::CanAccessSourceCode() const
+bool FQtCreatorSourceCodeAccessor::CanAccessSourceCode() const
 {
   return FPaths::FileExists(TEXT("/usr/bin/clang"));
 }
 
-FName FXCodeSourceCodeAccessor::GetFName() const
+FName FQtCreatorSourceCodeAccessor::GetFName() const
 {
   return FName("QtCreatorSourceCodeAccessor");
 }
 
-FText FXCodeSourceCodeAccessor::GetNameText() const 
+FText FQtCreatorSourceCodeAccessor::GetNameText() const 
 {
   return LOCTEXT("QtCreatorDisplayName", "Qt Creator");
 }
 
-FText FXCodeSourceCodeAccessor::GetDescriptionText() const
+FText FQtCreatorSourceCodeAccessor::GetDescriptionText() const
 {
   return LOCTEXT("QtCreatorDisplayDesc", "Open source code files with Qt Creator");
 }
 
-bool FXCodeSourceCodeAccessor::OpenSolution()
+bool FQtCreatorSourceCodeAccessor::OpenSolution()
 {
   FString FullPath;
   if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)){
@@ -69,7 +72,7 @@ bool FXCodeSourceCodeAccessor::OpenSolution()
   return false;
 }
 
-bool FXCodeSourceCodeAccessor::OpenFileAtLine(const FString& FullPath, int32 LineNumber, int32 ColumnNumber)
+bool FQtCreatorSourceCodeAccessor::OpenFileAtLine(const FString& FullPath, int32 LineNumber, int32 ColumnNumber)
 {
     FString Editor = FString(TEXT("/usr/bin/qtcreator"));
     FString Args = FString(TEXT("-client "));                                                           
@@ -87,7 +90,7 @@ bool FXCodeSourceCodeAccessor::OpenFileAtLine(const FString& FullPath, int32 Lin
   return false;
 }
 
-bool FXCodeSourceCodeAccessor::OpenSourceFiles(const TArray<FString>& AbsoluteSourcePaths) 
+bool FQtCreatorSourceCodeAccessor::OpenSourceFiles(const TArray<FString>& AbsoluteSourcePaths) 
 {
   for ( const FString& SourcePath : AbsoluteSourcePaths ) 
   {
@@ -108,12 +111,12 @@ bool FXCodeSourceCodeAccessor::OpenSourceFiles(const TArray<FString>& AbsoluteSo
   return true;
 }
 
-bool FXCodeSourceCodeAccessor::SaveAllOpenDocuments() const
+bool FQtCreatorSourceCodeAccessor::SaveAllOpenDocuments() const
 {
   return false;
 }
 
-void FXCodeSourceCodeAccessor::Tick(const float DeltaTime) 
+void FQtCreatorSourceCodeAccessor::Tick(const float DeltaTime) 
 {
 
 }

@@ -31,5 +31,5 @@ public:
 	virtual void ShutdownModule() override;
 
 private:
-	FXCodeSourceCodeAccessor QtCreatorSourceCodeAccessor;
+	FQtCreatorSourceCodeAccessor QtCreatorSourceCodeAccessor;
 };
