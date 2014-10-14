@@ -23,15 +23,15 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 #include "Runtime/Core/Public/Features/IModularFeatures.h"
 #include "QtCreatorSourceCodeAccessModule.h"
 
-IMPLEMENT_MODULE( FXCodeSourceCodeAccessModule, QtCreatorSourceCodeAccess );
+IMPLEMENT_MODULE( FQtCreatorSourceCodeAccessModule, QtCreatorSourceCodeAccess );
 
-void FXCodeSourceCodeAccessModule::StartupModule()
+void FQtCreatorSourceCodeAccessModule::StartupModule()
 {
 	// Bind our source control provider to the editor
 	IModularFeatures::Get().RegisterModularFeature(TEXT("SourceCodeAccessor"), &QtCreatorSourceCodeAccessor );
 }
 
-void FXCodeSourceCodeAccessModule::ShutdownModule()
+void FQtCreatorSourceCodeAccessModule::ShutdownModule()
 {
 	// unbind provider from editor
 	IModularFeatures::Get().UnregisterModularFeature(TEXT("SourceCodeAccessor"), &QtCreatorSourceCodeAccessor);

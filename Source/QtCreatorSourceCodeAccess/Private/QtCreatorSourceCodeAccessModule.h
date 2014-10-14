@@ -23,7 +23,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
 
 #include "QtCreatorSourceCodeAccessor.h"
 
-class FXCodeSourceCodeAccessModule : public IModuleInterface
+class FQtCreatorSourceCodeAccessModule : public IModuleInterface
 {
 public:
 	/** IModuleInterface implementation */

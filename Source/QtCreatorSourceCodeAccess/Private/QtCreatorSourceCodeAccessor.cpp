@@ -51,6 +51,9 @@ FText FQtCreatorSourceCodeAccessor::GetDescriptionText() const
 bool FQtCreatorSourceCodeAccessor::OpenSolution()
 {
   FString FullPath;
+  FString SolutionFilenameWithoutExtension = TEXT("UnrealEngine");
+  FString CodeSolutionFile = SolutionFilenameWithoutExtension + TEXT(".pro");
+
   if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)){
     if ( FPaths::FileExists( FullPath ) )
     {
