@@ -50,8 +50,9 @@ FText FQtCreatorSourceCodeAccessor::GetDescriptionText() const
 
 bool FQtCreatorSourceCodeAccessor::OpenSolution()
 {
+  printf("Yes it got to here.");
   FString FullPath;
-  FString SolutionFilenameWithoutExtension = TEXT("UnrealEngine");
+  FString SolutionFilenameWithoutExtension = TEXT("UE4");
   FString CodeSolutionFile = SolutionFilenameWithoutExtension + TEXT(".pro");
 
   if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)){
