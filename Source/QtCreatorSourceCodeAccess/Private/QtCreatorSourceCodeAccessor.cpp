@@ -50,7 +50,6 @@ FText FQtCreatorSourceCodeAccessor::GetDescriptionText() const
 
 bool FQtCreatorSourceCodeAccessor::OpenSolution()
 {
-  printf("Yes it got to here.");
   FString FullPath;
   FString SolutionFilenameWithoutExtension = TEXT("UE4");
   FString CodeSolutionFile = SolutionFilenameWithoutExtension + TEXT(".pro");
@@ -60,7 +59,11 @@ bool FQtCreatorSourceCodeAccessor::OpenSolution()
     {
       FString Editor = FString(TEXT("/usr/bin/qtcreator"));
       FString Args = FString(TEXT("-client "));
-      Args.Append(FullPath);
+
+      // Add this to handle spaces in path names.
+      const FString NewFullPath = FString::Printf(TEXT("\"%s\""), *FullPath);
+
+      Args.Append(NewFullPath);
       if(FLinuxPlatformProcess::CreateProc(*Editor,
                                            *Args,
                                            true,
@@ -70,7 +73,9 @@ bool FQtCreatorSourceCodeAccessor::OpenSolution()
                                            0,
                                            nullptr,
                                            nullptr).IsValid())
+      {
         return true;
+      }
     }
   }
   return false;
@@ -79,8 +84,12 @@ bool FQtCreatorSourceCodeAccessor::OpenSolution()
 bool FQtCreatorSourceCodeAccessor::OpenFileAtLine(const FString& FullPath, int32 LineNumber, int32 ColumnNumber)
 {
     FString Editor = FString(TEXT("/usr/bin/qtcreator"));
-    FString Args = FString(TEXT("-client "));                                                           
-    Args.Append(FullPath).Append(TEXT(":")).Append(FString::FromInt(LineNumber));
+    FString Args = FString(TEXT("-client "));
+
+    // Add this to handle spaces in path names.
+    const FString NewFullPath = FString::Printf(TEXT("\"%s:%d\""), *FullPath, LineNumber);
+
+    Args.Append(NewFullPath); // .Append(TEXT(":")).Append(FString::FromInt(LineNumber));
     if (FLinuxPlatformProcess::CreateProc(*Editor,
                                           *Args,
                                           true,
@@ -90,7 +99,10 @@ bool FQtCreatorSourceCodeAccessor::OpenFileAtLine(const FString& FullPath, int32
                                           0,
                                           nullptr,
                                           nullptr).IsValid())
+    {
       return true;
+    }
+
   return false;
 }
 
@@ -98,20 +110,27 @@ bool FQtCreatorSourceCodeAccessor::OpenSourceFiles(const TArray<FString>& Absolu
 {
   for ( const FString& SourcePath : AbsoluteSourcePaths ) 
   {
-    FString Editor = FString(TEXT("/usr/bin/qtcreator"));
-    FString Args = FString(TEXT("-client "));
-    Args.Append(SourcePath);
-    if(!(FLinuxPlatformProcess::CreateProc(*Editor,
-                                           *Args,
-                                           true,
-                                           true,
-                                           false,
-                                           nullptr,
-                                           0,
-                                           nullptr,
-                                           nullptr).IsValid())) 
-        return false;
-  }  
+      FString Editor = FString(TEXT("/usr/bin/qtcreator"));
+      FString Args = FString(TEXT("-client "));
+
+      // Add this to handle spaces in path names.
+      const FString NewSourcePath = FString::Printf(TEXT("\"%s\""), *SourcePath);
+
+      Args.Append(NewSourcePath);
+      if(!(FLinuxPlatformProcess::CreateProc(*Editor,
+                                             *Args,
+                                             true,
+                                             true,
+                                             false,
+                                             nullptr,
+                                             0,
+                                             nullptr,
+                                             nullptr).IsValid()))
+      {
+          return false;
+      }
+  }
+
   return true;
 }
 
