@@ -134,6 +134,11 @@ bool FQtCreatorSourceCodeAccessor::OpenSourceFiles(const TArray<FString>& Absolu
   return true;
 }
 
+bool FQtCreatorSourceCodeAccessor::AddSourceFiles(const TArray<FString>& AbsoluteSourcePaths, const TArray<FString>& AvailableModules)
+{
+	return false;
+}
+
 bool FQtCreatorSourceCodeAccessor::SaveAllOpenDocuments() const
 {
   return false;

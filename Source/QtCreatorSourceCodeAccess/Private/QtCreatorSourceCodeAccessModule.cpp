@@ -36,3 +36,8 @@ void FQtCreatorSourceCodeAccessModule::ShutdownModule()
 	// unbind provider from editor
 	IModularFeatures::Get().UnregisterModularFeature(TEXT("SourceCodeAccessor"), &QtCreatorSourceCodeAccessor);
 }
+
+FQtCreatorSourceCodeAccessor& FQtCreatorSourceCodeAccessModule::GetAccessor()
+{
+	return QtCreatorSourceCodeAccessor;
+}
