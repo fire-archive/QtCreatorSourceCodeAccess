@@ -1,6 +1,4 @@
-/*
-Copyright (c) 2015 K. S. Ernest 'iFire' Lee
-Copyright (c) AUTHORS.txt
+Copyright (c) 2015 K. S. Ernest 'iFire' Lee Copyright (c) AUTHORS.txt
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -18,23 +16,3 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-#pragma once
-
-#include "ISourceCodeAccessor.h"
-
-class FQtCreatorSourceCodeAccessor : public ISourceCodeAccessor
-{
-public:
-	/** ISourceCodeAccessor implementation */
-	virtual bool CanAccessSourceCode() const override;
-	virtual FName GetFName() const override;
-	virtual FText GetNameText() const override;
-	virtual FText GetDescriptionText() const override;
-	virtual bool OpenSolution() override;
-	virtual bool OpenFileAtLine(const FString& FullPath, int32 LineNumber, int32 ColumnNumber = 0) override;
-	virtual bool OpenSourceFiles(const TArray<FString>& AbsoluteSourcePaths) override;
-	virtual bool AddSourceFiles(const TArray<FString>& AbsoluteSourcePaths, const TArray<FString>& AvailableModules) override;
-	virtual bool SaveAllOpenDocuments() const override;
-	virtual void Tick(const float DeltaTime) override;
-};

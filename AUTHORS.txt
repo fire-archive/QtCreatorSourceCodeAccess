@@ -1,0 +1,5 @@
+Authors ordered by first contribution.
+
+K. S. Ernest (iFire) Lee <ernest.lee@chibifire.com>
+Renaud Lepage <root@cybikbase.com>
+Salamanderrake <salamanderrake@gmail.com>

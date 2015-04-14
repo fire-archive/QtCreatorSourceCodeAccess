@@ -11,3 +11,5 @@ Add to Engine/Config/Linux/LinuxEngine.ini
 PreferredAccessor=QtCreatorSourceCodeAccessor
 
 Reported to work for Unreal Engine 4.7.
+
+By submitting a patch to the project you agree to assign it the same MIT license as the project.
