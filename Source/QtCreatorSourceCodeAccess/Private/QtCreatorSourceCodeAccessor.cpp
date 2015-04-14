@@ -30,7 +30,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define LOCTEXT_NAMESPACE "QtCreatorSourceCodeAccessor"
 bool FQtCreatorSourceCodeAccessor::CanAccessSourceCode() const
 {
-  return FPaths::FileExists(TEXT("/usr/bin/env clang++"));
+  return FPaths::FileExists(TEXT("/usr/bin/clang++"));
 }
 
 FName FQtCreatorSourceCodeAccessor::GetFName() const
