@@ -1,7 +1,7 @@
 QtCreatorSourceCodeAccess
 ==============================
 
-This project is under the MIT license. By submitting a patch to the project you agree to assign it the same MIT license as the project.
+This project is under the MIT license. By submitting a patch to the project you agree to assign it the same MIT license as the project. See `LICENSE.txt`.
 
 ### Instructions
 
