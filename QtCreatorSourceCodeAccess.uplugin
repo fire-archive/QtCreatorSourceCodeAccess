@@ -7,7 +7,7 @@
 	"CreatedByURL" : "https://github.com/fire/QtCreatorSourceCodeAccess.git",
 	"EngineVersion" : "4.3.0",
 	"Description" : "Allows access to source code with Qt Creator.",
-	"Category" : "Developer.Source Code Access",
+	"Category": "Programming",
 	"EnabledByDefault" : true,
 	
 	"Modules" :
