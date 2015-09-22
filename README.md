@@ -16,6 +16,11 @@ PreferredAccessor=QtCreatorSourceCodeAccessor
 
 Reported to work for Unreal Engine 4.7.
 
+```
+cd /usr/bin/
+sudo ln -s clang-3.5 clang
+```
+
 ### Donations
 
 Accepting donations at: https://www.patreon.com/ernestlee
