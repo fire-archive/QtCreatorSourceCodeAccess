@@ -15,8 +15,7 @@
 		{
 			"Name" : "QtCreatorSourceCodeAccess",
 			"Type" : "Developer",
-			"WhitelistPlatforms" : [ "Linux" ],
-			"LoadingPhase" : "PreDefault"
+			"WhitelistPlatforms" : [ "Linux" ]
 		}
 	]
 }
