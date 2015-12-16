@@ -14,12 +14,7 @@ Add to Engine/Config/Linux/LinuxEngine.ini
 [/Script/SourceCodeAccess.SourceCodeAccessSettings]
 PreferredAccessor=QtCreatorSourceCodeAccessor
 
-Reported to work for Unreal Engine 4.7.
-
-```
-cd /usr/bin/
-sudo ln -s clang-3.5 clang
-```
+Tested to work on Unreal Engine 4.10.
 
 ### Donations
 

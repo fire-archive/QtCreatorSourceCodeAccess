@@ -5,7 +5,7 @@
 	"VersionName" : "1.0",
 	"CreatedBy" : "K. S. Ernest 'iFire' Lee",
 	"CreatedByURL" : "https://github.com/fire/QtCreatorSourceCodeAccess.git",
-	"EngineVersion" : "4.3.0",
+	"EngineVersion" : "4.10.0",
 	"Description" : "Allows access to source code with Qt Creator.",
 	"Category": "Programming",
 	"EnabledByDefault" : true,

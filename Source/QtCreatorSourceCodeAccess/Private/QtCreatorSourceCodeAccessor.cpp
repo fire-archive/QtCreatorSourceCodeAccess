@@ -1,23 +1,23 @@
 /*
-Copyright (c) 2015 K. S. Ernest 'iFire' Lee
-Copyright (c) AUTHORS.txt
+  Copyright (c) 2015 K. S. Ernest 'iFire' Lee
+  Copyright (c) AUTHORS.txt
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
+  Permission is hereby granted, free of charge, to any person obtaining a copy of
+  this software and associated documentation files (the "Software"), to deal in
+  the Software without restriction, including without limitation the rights to
+  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+  the Software, and to permit persons to whom the Software is furnished to do so,
+  subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+  FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 // Add a class to handle the Solution file locally
@@ -28,125 +28,132 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "DesktopPlatformModule.h"
 
 #define LOCTEXT_NAMESPACE "QtCreatorSourceCodeAccessor"
+
+DEFINE_LOG_CATEGORY_STATIC(LogQtCreatorAccessor, Log, All);
+
 bool FQtCreatorSourceCodeAccessor::CanAccessSourceCode() const
 {
-  return FPaths::FileExists(TEXT("/usr/bin/clang++"));
+        return FPaths::FileExists(TEXT("/usr/bin/clang-3.9"))
+        || FPaths::FileExists(TEXT("/usr/bin/clang-3.5"))
+        || FPaths::FileExists(TEXT("/usr/bin/clang-3.7"))
+        || FPaths::FileExists(TEXT("/usr/bin/clang-3.8"));
 }
 
 FName FQtCreatorSourceCodeAccessor::GetFName() const
 {
-  return FName("QtCreatorSourceCodeAccessor");
+        return FName("QtCreatorSourceCodeAccessor");
 }
 
 FText FQtCreatorSourceCodeAccessor::GetNameText() const 
 {
-  return LOCTEXT("QtCreatorDisplayName", "Qt Creator");
+        return LOCTEXT("QtCreatorDisplayName", "Qt Creator");
 }
 
 FText FQtCreatorSourceCodeAccessor::GetDescriptionText() const
 {
-  return LOCTEXT("QtCreatorDisplayDesc", "Open source code files with Qt Creator");
+        return LOCTEXT("QtCreatorDisplayDesc", "Open source code files with Qt Creator");
 }
 
 bool FQtCreatorSourceCodeAccessor::OpenSolution()
 {
-  FString FullPath;
-  FString SolutionFilenameWithoutExtension = TEXT("UE4");
-  FString CodeSolutionFile = SolutionFilenameWithoutExtension + TEXT(".pro");
+UE_LOG(LogQtCreatorAccessor,Warning, TEXT("FQtcreatorSourceCodeAccessor::OpenSolution: Opening solutions is not implemented, please open the .pro file manually with QtCreator."))
+/*        FString FullPath;
+        if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)){
+                if ( FPaths::FileExists( FullPath ) )
+                {
+                        FString CodeSolutionFile = FPaths::ConvertRelativePathToFull(FullPath) + FPaths::GetBaseFilename(FullPath) + FString(TEXT(".pro"));
+                        FString Editor = FString(TEXT("/usr/bin/qtcreator"));
+                        FString Args = FString(TEXT("-client "));
 
-  if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)){
-    if ( FPaths::FileExists( FullPath ) )
-    {
-      FString Editor = FString(TEXT("/usr/bin/qtcreator"));
-      FString Args = FString(TEXT("-client "));
+                        // Add this to handle spaces in path names.
+                        const FString NewFullPath = FString::Printf(TEXT("\"%s\""), *FullPath);
 
-      // Add this to handle spaces in path names.
-      const FString NewFullPath = FString::Printf(TEXT("\"%s\""), *FullPath);
-
-      Args.Append(NewFullPath);
-      if(FLinuxPlatformProcess::CreateProc(*Editor,
-                                           *Args,
-                                           true,
-                                           true,
-                                           false,
-                                           nullptr,
-                                           0,
-                                           nullptr,
-                                           nullptr).IsValid())
-      {
-        return true;
-      }
-    }
-  }
-  return false;
+                        Args.Append(NewFullPath);
+                        if(FLinuxPlatformProcess::CreateProc(*Editor,
+                                                             *Args,
+                                                             true,
+                                                             true,
+                                                             false,
+                                                             nullptr,
+                                                             0,
+                                                             nullptr,
+                                                             nullptr).IsValid())
+                        {
+                                return true;
+                        }
+                }
+        }
+*/
+        return false;
 }
 
 bool FQtCreatorSourceCodeAccessor::OpenFileAtLine(const FString& FullPath, int32 LineNumber, int32 ColumnNumber)
 {
-    FString Editor = FString(TEXT("/usr/bin/qtcreator"));
-    FString Args = FString(TEXT("-client "));
+        FString Editor = FString(TEXT("/usr/bin/qtcreator"));
+        FString Args = FString(TEXT("-client "));
 
-    // Add this to handle spaces in path names.
-    const FString NewFullPath = FString::Printf(TEXT("\"%s:%d\""), *FullPath, LineNumber);
+        // Add this to handle spaces in path names.
+        const FString NewFullPath = FString::Printf(TEXT("\"%s:%d\""), *FullPath, LineNumber);
 
-    Args.Append(NewFullPath); // .Append(TEXT(":")).Append(FString::FromInt(LineNumber));
-    if (FLinuxPlatformProcess::CreateProc(*Editor,
-                                          *Args,
-                                          true,
-                                          true,
-                                          false,
-                                          nullptr,
-                                          0,
-                                          nullptr,
-                                          nullptr).IsValid())
-    {
-      return true;
-    }
-
-  return false;
+        Args.Append(NewFullPath); // .Append(TEXT(":")).Append(FString::FromInt(LineNumber));
+        if (FLinuxPlatformProcess::CreateProc(*Editor,
+                                              *Args,
+                                              true,
+                                              true,
+                                              false,
+                                              nullptr,
+                                              0,
+                                              nullptr,
+                                              nullptr).IsValid())
+        {
+                return true;
+        }
+        return false;
 }
 
 bool FQtCreatorSourceCodeAccessor::OpenSourceFiles(const TArray<FString>& AbsoluteSourcePaths) 
 {
-  for ( const FString& SourcePath : AbsoluteSourcePaths ) 
-  {
-      FString Editor = FString(TEXT("/usr/bin/qtcreator"));
-      FString Args = FString(TEXT("-client "));
+        for ( const FString& SourcePath : AbsoluteSourcePaths ) 
+        {
+                FString Editor = FString(TEXT("/usr/bin/qtcreator"));
+                FString Args = FString(TEXT("-client "));
 
-      // Add this to handle spaces in path names.
-      const FString NewSourcePath = FString::Printf(TEXT("\"%s\""), *SourcePath);
+                // Add this to handle spaces in path names.
+                const FString NewSourcePath = FString::Printf(TEXT("\"%s\""), *SourcePath);
 
-      Args.Append(NewSourcePath);
-      if(!(FLinuxPlatformProcess::CreateProc(*Editor,
-                                             *Args,
-                                             true,
-                                             true,
-                                             false,
-                                             nullptr,
-                                             0,
-                                             nullptr,
-                                             nullptr).IsValid()))
-      {
-          return false;
-      }
-  }
+                Args.Append(NewSourcePath);
+                if(!(FLinuxPlatformProcess::CreateProc(*Editor,
+                                                       *Args,
+                                                       true,
+                                                       true,
+                                                       false,
+                                                       nullptr,
+                                                       0,
+                                                       nullptr,
+                                                       nullptr).IsValid()))
+                {
+                        return false;
+                }
+        }
 
-  return true;
+        return true;
 }
 
 bool FQtCreatorSourceCodeAccessor::AddSourceFiles(const TArray<FString>& AbsoluteSourcePaths, const TArray<FString>& AvailableModules)
 {
-	return false;
+        return false;
 }
 
 bool FQtCreatorSourceCodeAccessor::SaveAllOpenDocuments() const
 {
-  return false;
+        return false;
 }
 
 void FQtCreatorSourceCodeAccessor::Tick(const float DeltaTime) 
 {
 
 }
+
+
 
 #undef LOCTEXT_NAMESPACE
