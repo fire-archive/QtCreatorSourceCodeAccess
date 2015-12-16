@@ -56,17 +56,21 @@ FText FQtCreatorSourceCodeAccessor::GetDescriptionText() const
 
 bool FQtCreatorSourceCodeAccessor::OpenSolution()
 {
-UE_LOG(LogQtCreatorAccessor,Warning, TEXT("FQtcreatorSourceCodeAccessor::OpenSolution: Opening solutions is not implemented, please open the .pro file manually with QtCreator."))
-/*        FString FullPath;
-        if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)){
+        FString FullPath;
+        FString FilenamePart;
+        FString ExtensionPart;
+        if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)) {
                 if ( FPaths::FileExists( FullPath ) )
                 {
-                        FString CodeSolutionFile = FPaths::ConvertRelativePathToFull(FullPath) + FPaths::GetBaseFilename(FullPath) + FString(TEXT(".pro"));
+                        FString ProjectFolder;
+                        FPaths::Split(FullPath, ProjectFolder, FilenamePart, ExtensionPart);
+                        FString Filename = FilenamePart + FString(TEXT(".pro"));
+                        FString CodeSolutionFile = FPaths::Combine(*ProjectFolder, *Filename);
                         FString Editor = FString(TEXT("/usr/bin/qtcreator"));
                         FString Args = FString(TEXT("-client "));
 
                         // Add this to handle spaces in path names.
-                        const FString NewFullPath = FString::Printf(TEXT("\"%s\""), *FullPath);
+                        const FString NewFullPath = FString::Printf(TEXT("\"%s\""), *CodeSolutionFile);
 
                         Args.Append(NewFullPath);
                         if(FLinuxPlatformProcess::CreateProc(*Editor,
@@ -83,7 +87,6 @@ UE_LOG(LogQtCreatorAccessor,Warning, TEXT("FQtcreatorSourceCodeAccessor::OpenSol
                         }
                 }
         }
-*/
         return false;
 }
 
