@@ -7,7 +7,7 @@ This project is under the MIT license. By submitting a patch to the project you 
 
 Clone this to your UnrealEngine directory at `Engine/Plugins/Developer`.
 
-Compile the plugin. May require a full recompile of the editor.
+Compile the plugin. May require a full recompile of the editor. (Restart editor)
 
 Enable this as your code view editor.
 
