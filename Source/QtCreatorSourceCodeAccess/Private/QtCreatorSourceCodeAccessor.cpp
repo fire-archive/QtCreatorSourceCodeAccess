@@ -33,10 +33,11 @@ DEFINE_LOG_CATEGORY_STATIC(LogQtCreatorAccessor, Log, All);
 
 bool FQtCreatorSourceCodeAccessor::CanAccessSourceCode() const
 {
-        return FPaths::FileExists(TEXT("/usr/bin/clang-3.9"))
+        return FPaths::FileExists(TEXT("/usr/bin/clang"))
         || FPaths::FileExists(TEXT("/usr/bin/clang-3.5"))
         || FPaths::FileExists(TEXT("/usr/bin/clang-3.7"))
-        || FPaths::FileExists(TEXT("/usr/bin/clang-3.8"));
+        || FPaths::FileExists(TEXT("/usr/bin/clang-3.8"))
+        || FPaths::FileExists(TEXT("/usr/bin/clang-3.9"));
 }
 
 FName FQtCreatorSourceCodeAccessor::GetFName() const
