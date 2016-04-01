@@ -20,4 +20,4 @@ Tested to work on Unreal Engine 4.10.
 
 ### Donations
 
-Accepting donations at: https://www.patreon.com/ernestlee
+Accepting funding at: https://www.patreon.com/ernestlee
