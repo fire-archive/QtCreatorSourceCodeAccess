@@ -23,8 +23,8 @@
 // Add a class to handle the Solution file locally
 // instead of relying on FDesktopPlatformModule.
 
-#include "QtCreatorSourceCodeAccessPrivatePCH.h"
 #include "QtCreatorSourceCodeAccessor.h"
+#include "QtCreatorSourceCodeAccessPrivatePCH.h"
 #include "DesktopPlatformModule.h"
 
 #define LOCTEXT_NAMESPACE "QtCreatorSourceCodeAccessor"
