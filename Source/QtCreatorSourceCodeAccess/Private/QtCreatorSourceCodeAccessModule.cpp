@@ -20,9 +20,9 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#include "QtCreatorSourceCodeAccessModule.h"
 #include "QtCreatorSourceCodeAccessPrivatePCH.h"
 #include "Runtime/Core/Public/Features/IModularFeatures.h"
-#include "QtCreatorSourceCodeAccessModule.h"
 
 IMPLEMENT_MODULE( FQtCreatorSourceCodeAccessModule, QtCreatorSourceCodeAccess );
 
