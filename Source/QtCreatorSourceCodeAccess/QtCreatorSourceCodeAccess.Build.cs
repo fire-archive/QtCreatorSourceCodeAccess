@@ -24,7 +24,7 @@ namespace UnrealBuildTool.Rules
 {
 	public class QtCreatorSourceCodeAccess : ModuleRules
 	{
-                 public QtCreatorSourceCodeAccess(TargetInfo Target)
+                 public QtCreatorSourceCodeAccess(ReadOnlyTargetRules Target) : base(Target)
 		 {
 		 	PrivateDependencyModuleNames.AddRange(
                                 new string[]
