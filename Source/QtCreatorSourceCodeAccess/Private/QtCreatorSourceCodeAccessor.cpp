@@ -37,7 +37,8 @@ bool FQtCreatorSourceCodeAccessor::CanAccessSourceCode() const
         || FPaths::FileExists(TEXT("/usr/bin/clang-3.5"))
         || FPaths::FileExists(TEXT("/usr/bin/clang-3.7"))
         || FPaths::FileExists(TEXT("/usr/bin/clang-3.8"))
-        || FPaths::FileExists(TEXT("/usr/bin/clang-3.9"));
+        || FPaths::FileExists(TEXT("/usr/bin/clang-3.9"))
+        || FPaths::FileExists(TEXT("/usr/bin/clang-4.0"));
 }
 
 FName FQtCreatorSourceCodeAccessor::GetFName() const
