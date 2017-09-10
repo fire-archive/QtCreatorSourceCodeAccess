@@ -16,7 +16,7 @@ Add to Engine/Config/Linux/LinuxEngine.ini
 [/Script/SourceCodeAccess.SourceCodeAccessSettings]
 PreferredAccessor=QtCreatorSourceCodeAccessor
 
-Tested to work on Unreal Engine 4.10.
+Tested to work on Unreal Engine 4.17.1
 
 ### Donations
 
