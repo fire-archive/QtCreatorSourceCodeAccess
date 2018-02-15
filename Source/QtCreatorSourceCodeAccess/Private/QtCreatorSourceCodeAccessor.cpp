@@ -27,6 +27,8 @@
 #include "QtCreatorSourceCodeAccessPrivatePCH.h"
 #include "DesktopPlatformModule.h"
 
+#include "Misc/UProjectInfo.h"
+
 #define LOCTEXT_NAMESPACE "QtCreatorSourceCodeAccessor"
 
 DEFINE_LOG_CATEGORY_STATIC(LogQtCreatorAccessor, Log, All);
@@ -58,38 +60,75 @@ FText FQtCreatorSourceCodeAccessor::GetDescriptionText() const
 
 bool FQtCreatorSourceCodeAccessor::OpenSolution()
 {
-        FString FullPath;
-        FString FilenamePart;
-        FString ExtensionPart;
-        if(FDesktopPlatformModule::Get()->GetSolutionPath(FullPath)) {
-                if ( FPaths::FileExists( FullPath ) )
+	FString SolutionPath = GetSolutionPath();
+	return OpenSolutionAtPath(SolutionPath);
+}
+
+bool FQtCreatorSourceCodeAccessor::OpenSolutionAtPath(const FString& InSolutionPath)
+{
+	    FString SolutionPath = InSolutionPath;
+    	if (!SolutionPath.EndsWith(TEXT(".pro")))
+    	{
+    		SolutionPath += TEXT(".pro");
+    	}
+
+        if ( FPaths::FileExists( SolutionPath ) )
+        {
+                FString FilenamePart;
+                FString ExtensionPart;
+                FString ProjectFolder;
+                FPaths::Split(SolutionPath, ProjectFolder, FilenamePart, ExtensionPart);
+                FString Filename = FilenamePart + FString(TEXT(".pro"));
+                FString CodeSolutionFile = FPaths::Combine(*ProjectFolder, *Filename);
+                FString Editor = FString(TEXT("/usr/bin/qtcreator"));
+                FString Args = FString(TEXT("-client "));
+
+                // Add this to handle spaces in path names.
+                const FString NewFullPath = FString::Printf(TEXT("\"%s\""), *CodeSolutionFile);
+	
+                Args.Append(NewFullPath);
+
+                if(FLinuxPlatformProcess::CreateProc(*Editor,
+                                                     *Args,
+                                                     true,
+                                                     true,
+                                                     false,
+                                                     nullptr,
+                                                     0,
+                                                     nullptr,
+                                                     nullptr).IsValid())
                 {
-                        FString ProjectFolder;
-                        FPaths::Split(FullPath, ProjectFolder, FilenamePart, ExtensionPart);
-                        FString Filename = FilenamePart + FString(TEXT(".pro"));
-                        FString CodeSolutionFile = FPaths::Combine(*ProjectFolder, *Filename);
-                        FString Editor = FString(TEXT("/usr/bin/qtcreator"));
-                        FString Args = FString(TEXT("-client "));
-
-                        // Add this to handle spaces in path names.
-                        const FString NewFullPath = FString::Printf(TEXT("\"%s\""), *CodeSolutionFile);
-
-                        Args.Append(NewFullPath);
-                        if(FLinuxPlatformProcess::CreateProc(*Editor,
-                                                             *Args,
-                                                             true,
-                                                             true,
-                                                             false,
-                                                             nullptr,
-                                                             0,
-                                                             nullptr,
-                                                             nullptr).IsValid())
-                        {
-                                return true;
-                        }
+                        return true;
                 }
         }
+
         return false;
+}
+
+bool FQtCreatorSourceCodeAccessor::DoesSolutionExist() const
+{
+	FString SolutionPath = GetSolutionPath();
+	return FPaths::FileExists(SolutionPath);
+}
+
+FString FQtCreatorSourceCodeAccessor::GetSolutionPath() const
+{
+	if(IsInGameThread())
+	{
+		CachedSolutionPath = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
+		
+		if (!FUProjectDictionary(FPaths::RootDir()).IsForeignProject(CachedSolutionPath))
+		{
+			CachedSolutionPath = FPaths::Combine(FPaths::RootDir(), TEXT("UE4.pro"));
+		}
+		else
+		{
+			FString BaseName = FApp::HasProjectName() ? FApp::GetProjectName() : FPaths::GetBaseFilename(CachedSolutionPath);
+			CachedSolutionPath = FPaths::Combine(CachedSolutionPath, BaseName + TEXT(".pro"));
+		}
+	}
+
+	return CachedSolutionPath;
 }
 
 bool FQtCreatorSourceCodeAccessor::OpenFileAtLine(const FString& FullPath, int32 LineNumber, int32 ColumnNumber)
