@@ -48,7 +48,7 @@ FName FQtCreatorSourceCodeAccessor::GetFName() const
         return FName("QtCreatorSourceCodeAccessor");
 }
 
-FText FQtCreatorSourceCodeAccessor::GetNameText() const 
+FText FQtCreatorSourceCodeAccessor::GetNameText() const
 {
         return LOCTEXT("QtCreatorDisplayName", "Qt Creator");
 }
@@ -155,9 +155,9 @@ bool FQtCreatorSourceCodeAccessor::OpenFileAtLine(const FString& FullPath, int32
         return false;
 }
 
-bool FQtCreatorSourceCodeAccessor::OpenSourceFiles(const TArray<FString>& AbsoluteSourcePaths) 
+bool FQtCreatorSourceCodeAccessor::OpenSourceFiles(const TArray<FString>& AbsoluteSourcePaths)
 {
-        for ( const FString& SourcePath : AbsoluteSourcePaths ) 
+        for ( const FString& SourcePath : AbsoluteSourcePaths )
         {
                 FString Editor = FString(TEXT("/usr/bin/qtcreator"));
                 FString Args = FString(TEXT("-client "));
@@ -193,7 +193,7 @@ bool FQtCreatorSourceCodeAccessor::SaveAllOpenDocuments() const
         return false;
 }
 
-void FQtCreatorSourceCodeAccessor::Tick(const float DeltaTime) 
+void FQtCreatorSourceCodeAccessor::Tick(const float DeltaTime)
 {
 
 }
