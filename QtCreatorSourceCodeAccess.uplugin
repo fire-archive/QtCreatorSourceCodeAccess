@@ -1,21 +1,26 @@
 {
-	"FileVersion" : 3,
-	"FriendlyName" : "Qt Creator Source Code Access",
-	"Version" : 1,
-	"VersionName" : "1.0",
-	"CreatedBy" : "K. S. Ernest 'iFire' Lee",
-	"CreatedByURL" : "https://github.com/fire/QtCreatorSourceCodeAccess.git",
-	"EngineVersion" : "4.18.0",
-	"Description" : "Allows access to source code with Qt Creator.",
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Qt Creator Source Code Access",
+	"Description": "Allows access to source code with Qt Creator.",
 	"Category": "Programming",
-	"EnabledByDefault" : true,
-	
-	"Modules" :
-	[
+	"CreatedBy": "K. S. Ernest 'iFire' Lee",
+	"CreatedByURL": "https://github.com/fire/QtCreatorSourceCodeAccess.git",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"EngineVersion": "4.22.0",
+	"CanContainContent": false,
+	"Installed": true,
+	"Modules": [
 		{
-			"Name" : "QtCreatorSourceCodeAccess",
-			"Type" : "Developer",
-			"WhitelistPlatforms" : [ "Linux" ]
+			"Name": "QtCreatorSourceCodeAccess",
+			"Type": "Developer",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Linux"
+			]
 		}
 	]
 }
